@@ -9,7 +9,9 @@ export function getAll(): Promise<Good[]> {
       throw new Error(`Failed to fetch goods: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json().catch(error => {
+      throw new Error(`Failed to parse goods data: ${error.message}`);
+    });
   });
 }
 
